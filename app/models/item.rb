@@ -14,4 +14,13 @@ class Item < ApplicationRecord
   def new
 
   end
+
+  # def total_sales(item_id)
+  #   item = Item.find(item_id)
+  #   item.invoice_items.sum('unit_price * quantity') / 100.to_f
+  #   # joins(:invoice_items, invoices: :transactions)
+  #   # .where(transactions: {result: 0})
+  #   # .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price')
+  #   # .group(:id)
+  # end
 end
