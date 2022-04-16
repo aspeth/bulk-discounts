@@ -154,7 +154,7 @@ RSpec.describe Merchant, type: :model do
 
       expect(merch1.enabled_items).to eq([item1, item3])
     end
-    
+
     it '#disabled_items' do
       merch1 = FactoryBot.create(:merchant)
       cust1 = FactoryBot.create(:customer)
@@ -183,5 +183,37 @@ RSpec.describe Merchant, type: :model do
       merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: date7, updated_at: date7, status: 0)
       expect(Merchant.status_disabled).to eq([merch2, merch4, merch6])
     end
+  end
+
+  it '#top_five_items' do
+    merchant_1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now)
+    customer_1 = create(:customer)
+    item_9 = create(:item, name: 'Elden Ring', unit_price: 999, merchant_id: merchant_1.id)
+    item_7 = create(:item, name: 'Demons Souls', unit_price: 888, merchant_id: merchant_1.id)
+    item_11 = create(:item, name: 'Dark Souls 3', unit_price: 777, merchant_id: merchant_1.id)
+    item_12 = create(:item, name: 'Doom', unit_price: 666, merchant_id: merchant_1.id)
+    item_3 = create(:item, name: 'Bloodborne', unit_price: 555, merchant_id: merchant_1.id)
+    item_1 = create(:item, name: 'Metal Gear', unit_price: 444, merchant_id: merchant_1.id)
+    invoice_9 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_7 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_11 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_12 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: Time.now, updated_at: Time.now)
+    transaction_9 = create(:transaction, invoice_id: invoice_9.id, result: 0)
+    transaction_7 = create(:transaction, invoice_id: invoice_7.id, result: 0)
+    transaction_11 = create(:transaction, invoice_id: invoice_11.id, result: 0)
+    transaction_12 = create(:transaction, invoice_id: invoice_12.id, result: 0)
+    transaction_3 = create(:transaction, invoice_id: invoice_3.id, result: 0)
+    transaction_1 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    invoice_item_9 = create(:invoice_item, item_id: item_9.id, invoice_id: invoice_9.id, status: 2, quantity: 1, unit_price: 99)
+    invoice_item_7 = create(:invoice_item, item_id: item_7.id, invoice_id: invoice_7.id, status: 2, quantity: 1, unit_price: 88)
+    invoice_item_11 = create(:invoice_item, item_id: item_11.id, invoice_id: invoice_11.id, status: 2, quantity: 1, unit_price: 77)
+    invoice_item_12 = create(:invoice_item, item_id: item_12.id, invoice_id: invoice_12.id, status: 2, quantity: 1, unit_price: 66)
+    invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_3.id, status: 2, quantity: 1, unit_price: 55)
+    invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, status: 2, quantity: 1, unit_price: 44)
+
+    merchant_1.top_five_items
+    expect(merchant_1.top_five_items).to eq([item_9, item_7, item_11, item_12, item_3])
   end
 end
