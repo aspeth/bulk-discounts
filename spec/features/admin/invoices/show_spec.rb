@@ -19,7 +19,6 @@ RSpec.describe "Admin Invoice Show Page" do
     end
 
     it 'lists the item names on the invoice' do
-      save_and_open_page
       expect(page).to have_content("#{@item_1.name}")
       expect(page).to have_content("#{@item_11.name}")
       expect(page).to have_content("#{@item_111.name}")
