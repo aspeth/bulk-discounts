@@ -123,6 +123,8 @@ RSpec.describe 'admin dashboad spec' do
         expect(page).to have_link("#{@invoice_6.id}")
         expect(page).to have_link("#{@invoice_3.id}")
 
+        click_link "#{@invoice_4.id}"
+        expect(current_path).to eq("/admin/invoices/#{@invoice_4.id}")
       end
     end
 
