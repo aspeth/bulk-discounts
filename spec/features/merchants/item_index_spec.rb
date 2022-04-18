@@ -155,11 +155,11 @@ RSpec.describe 'Merchant Item Index Page' do
     visit merchant_items_path(merchant_1)
 
     within '#top-five-items' do
-      expect(page).to have_content("Top selling date for Elden Ring: Mon, 25 March 2013")
-      expect(page).to have_content("Top selling date for Demons Souls: Sun, 25 March 2012")
-      expect(page).to have_content("Top selling date for Dark Souls 3: Fri, 25 March 2011")
-      expect(page).to have_content("Top selling date for Doom: Thu, 25 March 2010")
-      expect(page).to have_content("Top selling date for Bloodborne: Wed, 25 March 2009")
+      expect(page).to have_content("Top selling date for Elden Ring: Monday, March 25, 2013")
+      expect(page).to have_content("Top selling date for Demons Souls: Sunday, March 25, 2012")
+      expect(page).to have_content("Top selling date for Dark Souls 3: Friday, March 25, 2011")
+      expect(page).to have_content("Top selling date for Doom: Thursday, March 25, 2010")
+      expect(page).to have_content("Top selling date for Bloodborne: Wednesday, March 25, 2009")
     end
   end
 end
