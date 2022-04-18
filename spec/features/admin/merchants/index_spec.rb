@@ -208,7 +208,6 @@ RSpec.describe "Admin Merchants Index Page" do
         invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, status: 2, quantity: 1, unit_price: 9999)
 
         #merchant_1 sold 8888 on 02/21/2020
-        merchant_1 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now)
         item_2 = create(:item, name: 'Bolden Gloom', unit_price: 8888, merchant_id: merchant_1.id)
         invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: date_2, updated_at: Time.now)
         transaction_list_2 = Transaction.create!(credit_card_number: '103294023', credit_card_expiration_date: "342", result: 0, created_at: Time.now, updated_at: Time.now, invoice_id: invoice_2.id)
@@ -224,12 +223,11 @@ RSpec.describe "Admin Merchants Index Page" do
         invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_3.id, status: 2, quantity: 1, unit_price: 7777)
 
         #merchant_2 sold 7777 on 02/08/2015
-        merchant_2 = Merchant.create!(name: 'My Dog Skeeter', created_at: Time.now, updated_at: Time.now)
-        item_4 = create(:item, name: 'Literally a Dog', unit_price: 12345, merchant_id: merchant_2.id)
+        item_4 = create(:item, name: 'Literally a Dog', unit_price: 7777, merchant_id: merchant_2.id)
         invoice_4 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: date_1, updated_at: Time.now)
         transaction_list_4 = Transaction.create!(credit_card_number: '103294023', credit_card_expiration_date: "342", result: 0, created_at: Time.now, updated_at: Time.now, invoice_id: invoice_4.id)
 
-        invoice_item_4 = create(:invoice_item, item_id: item_4.id, invoice_id: invoice_4.id, status: 2, quantity: 1, unit_price: 12345)
+        invoice_item_4 = create(:invoice_item, item_id: item_4.id, invoice_id: invoice_4.id, status: 2, quantity: 1, unit_price: 7777)
 
         visit "/admin/merchants"
         
