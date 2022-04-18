@@ -20,8 +20,16 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    merchant = Merchant.new(merchant_params)
-    merchant.save
+  
+    merchant = Merchant.new({ 
+      name: params[:name],
+      created_at: DateTime.now, 
+      updated_at: DateTime.now, 
+      #status automatically defaults to :disabled / 1
+     })
+    if merchant.save
+      redirect_to "/admin/merchants"
+    end
   end
 
   def update
@@ -41,6 +49,6 @@ class Admin::MerchantsController < ApplicationController
 
     private
       def merchant_params
-        params.permit(:id, :name, :status)
+        params.permit(:id, :name, :status, :created_at, :updated_at)
     end
 end
