@@ -13,3 +13,12 @@
     <% end %>
   </ol>
 </section>
+
+
+  <section id="incomplete_invoices">
+    <h3>Incomplete Invoices</h3>
+        <% @invoices.incomplete_invoices.each do |invoice| %>
+          <p>Invoice #<%= link_to "#{invoice.id}", "admin/invoices/#{invoice.id}" %></p>
+        <p>Record Originated : <%= invoice.created_at.strftime("%A, %B %d, %Y %T") %></p><br>
+        <% end %>
+  </section>
