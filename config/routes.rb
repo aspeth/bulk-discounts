@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :dashboard, only:[:index]
   end
 
-  resources :admin, controller: 'admin/dashboard', only: [:index]
+  # resources :admin, controller: 'admin/dashboard', only: [:index]
   # namespace :admin do
   #   # resources :invoices
   #   # resources :merchants
@@ -25,10 +25,12 @@ Rails.application.routes.draw do
 
   get '/admin', to: "admin/dashboard#index"
   get '/admin/merchants', to: 'admin/merchants#index'
+  get '/admin/merchants/new', to: 'admin/merchants#new'
   get '/admin/merchants/:id', to: 'admin/merchants#show'
   get '/admin/merchants/:id/edit', to: 'admin/merchants#edit'
   patch '/admin/merchants/:id', to: 'admin/merchants#update'
   get '/admin/invoices/:id', to: 'admin/invoices#show'
   # get '/merchants/:id/invoices', to: 'merchant_invoices#index'
   get '/merchants/:merchant_id/invoices/:id', to: 'merchant_invoices#show'
+
 end
