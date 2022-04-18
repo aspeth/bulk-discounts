@@ -13,7 +13,7 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:transactions) }
   end
 
-  describe 'instance methods' do
+  describe 'instance and class methods' do
     it 'returns the invoices created at date as Weekday, Month Day, Year' do
       date = 	"2020-02-08 09:54:09 UTC".to_datetime
       cust1 = FactoryBot.create(:customer, first_name: "L'Ron", last_name: 'Hubbard')
