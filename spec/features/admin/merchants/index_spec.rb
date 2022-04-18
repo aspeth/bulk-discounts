@@ -193,7 +193,19 @@ RSpec.describe "Admin Merchants Index Page" do
       end
 
     end
+    describe 'Merchant Creation Link' do
+      
+      it 'has a link to create a new merchant, link takes to a new page' do
+        merchant_1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now, status: 0)
+        merchant_2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now, status: 1)
+                
+        visit "/admin/merchants"
+        
+        click_link "Create a New Merchant"
+        expect(current_path).to eq("/admin/merchants/new")
 
+      end
+    end
 
 
 
