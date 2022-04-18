@@ -113,7 +113,7 @@ RSpec.describe "Admin Merchants Index Page" do
 
     describe 'Top 5 Merchants by revenue are shown' do
       
-      it 'I see the name of each merchant, and a link to their show page' do
+      it 'I see the name of each merchant, their total revenue, and a link to their show page' do
 
         merchant_1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now)
         item_1 = create(:item, name: 'Elden Ring', unit_price: 9999, merchant_id: merchant_1.id)
@@ -167,36 +167,40 @@ RSpec.describe "Admin Merchants Index Page" do
           expect("My Dog Skeeter").to appear_before("Lord Eldens")
           expect("Lord Eldens").to appear_before("Jeffs GoldBlooms")
           expect("Jeffs GoldBlooms").to appear_before("Souls Darkery")
+          expect(page).to_not have_content("Corgi Town")
         end
 
         within "#top_five_merchant-#{merchant_6.id}" do
           expect(page).to have_link("Cheese Company")
+          expect(page).to have_content("Total Revenue: $18175.20")
         end
 
         within "#top_five_merchant-#{merchant_4.id}" do
           expect(page).to have_link("My Dog Skeeter")
+          expect(page).to have_content("Total Revenue: $123.45")
         end
 
         within "#top_five_merchant-#{merchant_1.id}" do
           expect(page).to have_link("Lord Eldens")
+          expect(page).to have_content("Total Revenue: $99.99")
         end
 
         within "#top_five_merchant-#{merchant_2.id}" do
           expect(page).to have_link("Jeffs GoldBlooms")
+          expect(page).to have_content("Total Revenue: $88.88")
+
         end
 
         within "#top_five_merchant-#{merchant_3.id}" do
+          expect(page).to have_content("Total Revenue: $77.77")
           click_link "Souls Darkery"
+
         end
         expect(current_path).to eq("/admin/merchants/#{merchant_3.id}")
 
       end
 
     end
-
-
-
-
   end
 
 end
