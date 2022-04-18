@@ -203,7 +203,7 @@ RSpec.describe "Admin Merchants Index Page" do
         
         click_link "Create a New Merchant"
         expect(current_path).to eq("/admin/merchants/new")
-
+        #the rest of this user story testing is in admin/merchants/new_spec.rb
       end
     end
 

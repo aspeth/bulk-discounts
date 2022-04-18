@@ -20,13 +20,12 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-  
     merchant = Merchant.new({ 
       name: params[:name],
       created_at: DateTime.now, 
       updated_at: DateTime.now, 
+      })
       #status automatically defaults to :disabled / 1
-     })
     if merchant.save
       redirect_to "/admin/merchants"
     end

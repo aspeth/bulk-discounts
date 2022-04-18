@@ -5,8 +5,9 @@ RSpec.describe "Admin Merchants New Page" do
   describe "As a visitor, I can create a new merchant" do
 
     it 'submitting returns to admin/merchant index, with new merchant under disabled section' do
+      
       visit "/admin/merchants/new"
-      # save_and_open_page
+      
       fill_in "Name", with: "Chungus Inc."
 
       click_on "Submit"
@@ -16,8 +17,5 @@ RSpec.describe "Admin Merchants New Page" do
       end
      
     end 
-
-
-
   end 
 end 
