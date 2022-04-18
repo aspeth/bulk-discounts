@@ -72,33 +72,34 @@ RSpec.describe 'admin dashboad spec' do
 
       # customer_1, 6 succesful transactions and 1 failed
       @customer_1 = create(:customer)
-      @invoice_1 = create(:invoice, status: 0, customer_id: @customer_1.id, created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_1 = create(:invoice, status: 0, customer_id: @customer_1.id, created_at: "2015-03-25 09:54:09 UTC")
       @invoice_item_1 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_1.id, status: 2)
       @transactions_list_1 = FactoryBot.create_list(:transaction, 6, invoice_id: @invoice_1.id, result: 0)
       @failed_1 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
-
+      
+      #customer_3 4 succesful
+      @customer_3 = create(:customer)
+      @invoice_3 = create(:invoice, status: 1,customer_id: @customer_3.id, created_at: "2020-03-25 09:54:09 UTC")
+      @invoice_item_3 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_3.id, status: 1)
+      @transactions_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: @invoice_3.id, result: 0)
+      
       # customer_2 5 succesful transactions
       @customer_2 = create(:customer)
-      @invoice_2 = create(:invoice, status: 2, customer_id: @customer_2.id, created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_2 = create(:invoice, status: 2, customer_id: @customer_2.id, created_at: "2016-03-25 09:54:09 UTC")
       @invoice_item_2 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_2.id, status: 2)
       transactions_list_2 = FactoryBot.create_list(:transaction, 5, invoice_id: @invoice_2.id, result: 0)
 
 
       #customer_4 3 succesful
       @customer_4 = create(:customer)
-      @invoice_4 = create(:invoice, status: 1, customer_id: @customer_4.id, created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_4 = create(:invoice, status: 1, customer_id: @customer_4.id, created_at: "2002-03-25 09:54:09 UTC")
       @invoice_item_4 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_4.id, status: 1)
       @transactions_list_4 = FactoryBot.create_list(:transaction, 3, invoice_id: @invoice_4.id, result: 0)
 
-      #customer_3 4 succesful
-      @customer_3 = create(:customer)
-      @invoice_3 = create(:invoice, status: 1,customer_id: @customer_3.id, created_at: "2012-03-25 09:54:09 UTC")
-      @invoice_item_3 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_3.id, status: 1)
-      @transactions_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: @invoice_3.id, result: 0)
 
       #customer_5 2 succesful
       @customer_5 = create(:customer)
-      @invoice_5 = create(:invoice, status: 2, customer_id: @customer_5.id, created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_5 = create(:invoice, status: 2, customer_id: @customer_5.id, created_at: "2019-03-25 09:54:09 UTC")
       @transactions_list_5 = FactoryBot.create_list(:transaction, 2, invoice_id: @invoice_5.id, result: 0)
       @invoice_item_5 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_5.id, status: 2)
 
@@ -130,8 +131,8 @@ RSpec.describe 'admin dashboad spec' do
 
     it ' shows unshipped items sorted from oldest to newest created_by ' do
       within"#incomplete_invoices" do
-        expect("#{@invoice_4.id}").to appear_before("#{@invoice_3.id}")
-        expect("#{@invoice_3.id}").to appear_before("#{@invoice_6.id}")
+        expect("#{@invoice_4.id}").to appear_before("#{@invoice_6.id}")
+        expect("#{@invoice_6.id}").to appear_before("#{@invoice_3.id}")
       end
     end
   end

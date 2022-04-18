@@ -21,12 +21,6 @@ class Invoice < ApplicationRecord
   end
 
   def self.incomplete_invoices
-
-   joins(:invoice_items).where(status: [1])
+    joins(:invoice_items).where(status: [1]).order(:created_at)
   end
-
-  def self.order_invoices
-    order(:created_at)
-  end
-
 end

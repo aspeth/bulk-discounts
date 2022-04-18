@@ -21,7 +21,6 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship
-    # require 'pry'; binding.pry
     invoice_items.joins(:invoice).where.not(status: 2).order('invoices.created_at')
   end
 

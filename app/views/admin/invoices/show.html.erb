@@ -9,7 +9,8 @@
  <h2><b>Items:</b></h2>
   <% @invoice.invoice_items.each do |invoice_item| %>
   <h3><%= invoice_item.item.name %></h3>
-  <p>     Price: ¢<%= invoice_item.item.unit_price %><br>
+  <p>     Price: $<%= "%.2f" % invoice_item.price_to_dollars %><br>
        Quantity sold: <%= invoice_item.quantity %><br>
+       Invoice Item Status: <%= invoice_item.status %>
      _______________________</p>
   <% end %>
