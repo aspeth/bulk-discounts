@@ -24,9 +24,9 @@ RSpec.describe 'the admin invoice show page' do
       @item_1 = create(:item, merchant_id: @merchant_1.id)
       @item_11 = create(:item, merchant_id: @merchant_1.id)
       @item_111 = create(:item, merchant_id: @merchant_1.id)
-      @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: 1)
-      @invoice_item_11 = create(:invoice_item, item_id: @item_11.id, invoice_id: @invoice_1.id, status: 1)
-      @invoice_item_111 = create(:invoice_item, item_id: @item_111.id, invoice_id: @invoice_1.id, status: 1)
+      @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: 0, quantity: 1, unit_price: 101)
+      @invoice_item_11 = create(:invoice_item, item_id: @item_11.id, invoice_id: @invoice_1.id, status: 1, quantity: 2, unit_price: 201)
+      @invoice_item_111 = create(:invoice_item, item_id: @item_111.id, invoice_id: @invoice_1.id, status: 2, quantity: 3, unit_price: 300)
 
       visit "/admin/invoices/#{@invoice_1.id}"
     end
@@ -38,12 +38,15 @@ RSpec.describe 'the admin invoice show page' do
     end
 
     it 'shows the unit price and quantity sold for each item' do
-      expect(page).to have_content("#{@item_1.unit_price}")
-      expect(page).to have_content("#{@item_11.unit_price}")
-      expect(page).to have_content("#{@item_111.unit_price}")
-      expect(page).to have_content("#{@invoice_item_1.quantity}")
-      expect(page).to have_content("#{@invoice_item_11.quantity}")
-      expect(page).to have_content("#{@invoice_item_111.quantity}")
+      expect(page).to have_content("Price: $1.01")
+      expect(page).to have_content("Price: $2.01")
+      expect(page).to have_content("Price: $3.00")
+      expect(page).to have_content("Quantity sold: 1")
+      expect(page).to have_content("Quantity sold: 2")
+      expect(page).to have_content("Quantity sold: 3")
+      expect(page).to have_content("Status: packaged")
+      expect(page).to have_content("Status: pending")
+      expect(page).to have_content("Status: shipped")
     end
   end
 end
