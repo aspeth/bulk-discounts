@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get '/admin/merchants/:id', to: 'admin/merchants#show'
   get '/admin/merchants/:id/edit', to: 'admin/merchants#edit'
   patch '/admin/merchants/:id', to: 'admin/merchants#update'
-
+  get '/admin/invoices/:id', to: 'admin/invoices#show'
   # get '/merchants/:id/invoices', to: 'merchant_invoices#index'
   get '/merchants/:merchant_id/invoices/:id', to: 'merchant_invoices#show'
 end
