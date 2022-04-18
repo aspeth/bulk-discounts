@@ -14,6 +14,7 @@ RSpec.describe 'the admin invoice show page' do
     expect(page).to have_content("Created: #{invoice_1.formatted_created_at}")
     expect(page).to have_content("Customer First Name: #{customer_1.first_name}")
     expect(page).to have_content("Customer Last Name: #{customer_1.last_name}")
+  end
 
   describe 'As an Admin' do
     before do
