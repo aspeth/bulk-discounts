@@ -6,7 +6,7 @@
 
 <h3>My Items on This Invoice:</h3>
 
-<% @merchants_items.each do |invoice_item| %>
+<% @merchant.current_invoice_items(@invoice.id).each do |invoice_item| %>
 <section id="invoice_item-<%= invoice_item.id %>">
 
 
