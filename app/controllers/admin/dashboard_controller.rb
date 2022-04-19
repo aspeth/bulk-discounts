@@ -4,6 +4,5 @@ class Admin::DashboardController < ApplicationController
       @merchants = Merchant.all
       @customers = Customer.all
       @invoice_items = InvoiceItem.all
-
     end
 end

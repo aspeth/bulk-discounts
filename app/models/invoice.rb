@@ -21,4 +21,9 @@ class Invoice < ApplicationRecord
   def self.incomplete_invoices
     joins(:invoice_items).where(status: [1]).order(:created_at)
   end
+
+  def self.revenue_for_invoice(invoice_id)
+    invoice = Invoice.find(invoice_id)
+    invoice.invoice_items.sum('unit_price * quantity') / 100.to_f
+  end
 end

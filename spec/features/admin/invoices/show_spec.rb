@@ -48,5 +48,9 @@ RSpec.describe 'the admin invoice show page' do
       expect(page).to have_content("Status: pending")
       expect(page).to have_content("Status: shipped")
     end
+
+    it 'will return total revenue from this invoice' do
+      expect(page).to have_content("Total Revenue: $14.03")
+    end
   end
 end

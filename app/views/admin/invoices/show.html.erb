@@ -4,7 +4,6 @@
 <h3>Created: <%= @invoice.formatted_created_at %></h3>
 <h3>Customer First Name: <%= @invoice.customer.first_name %></h3>
 <h3>Customer Last Name: <%= @invoice.customer.last_name %></h3>
-
 <h1> Invoice Number: <%= @invoice.id %></h1>
  <h2><b>Items:</b></h2>
   <% @invoice.invoice_items.each do |invoice_item| %>
@@ -13,4 +12,6 @@
        Quantity sold: <%= invoice_item.quantity %><br>
        Invoice Item Status: <%= invoice_item.status %>
      _______________________</p>
-  <% end %>
+
+  <h4>Total Revenue: $<%= Invoice.revenue_for_invoice(@invoice.id) %></h4>
+    <% end %>

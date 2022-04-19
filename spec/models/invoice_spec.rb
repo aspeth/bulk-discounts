@@ -59,11 +59,11 @@ RSpec.describe Invoice, type: :model do
         @invoice_3 = create(:invoice, status: 1,customer_id: @customer_3.id, created_at: "2012-03-25 09:54:09 UTC")
         @invoice_item_3 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_3.id, status: 2)
         @transactions_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: @invoice_3.id, result: 0)
-      
+
       expect(Invoice.incomplete_invoices).to eq([@invoice_3])
 
     end
-    
+
     it '#self.incomplete_invoices returns invoices ordered from oldest to newest' do
       @merchant_1 = create(:merchant)
       @item = create(:item, merchant_id: @merchant_1.id, )
@@ -74,13 +74,13 @@ RSpec.describe Invoice, type: :model do
       @invoice_item_1 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_1.id, status: 2)
       @transactions_list_1 = FactoryBot.create_list(:transaction, 6, invoice_id: @invoice_1.id, result: 0)
       @failed_1 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
-      
+
       #customer_3 4 succesful
       @customer_3 = create(:customer)
       @invoice_3 = create(:invoice, status: 1,customer_id: @customer_3.id, created_at: "2020-03-25 09:54:09 UTC")
       @invoice_item_3 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_3.id, status: 1)
       @transactions_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: @invoice_3.id, result: 0)
-      
+
       # customer_2 5 succesful transactions
       @customer_2 = create(:customer)
       @invoice_2 = create(:invoice, status: 2, customer_id: @customer_2.id, created_at: "2016-03-25 09:54:09 UTC")
@@ -106,8 +106,33 @@ RSpec.describe Invoice, type: :model do
       @invoice_6 = create(:invoice, customer_id: @customer_6.id, status: 1, created_at: "2012-03-25 09:54:09 UTC")
       @invoice_item_6 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_6.id, status: 1)
       transactions_list_6 = FactoryBot.create_list(:transaction, 1, invoice_id: @invoice_6.id, result: 0)
-      
+
       expect(Invoice.incomplete_invoices).to eq([@invoice_4, @invoice_6, @invoice_3])
     end
   end
+
+  describe 'invoice revenue calculation' do
+    it 'calculates total revenue on invoice' do
+        merch1 = FactoryBot.create(:merchant)
+        merch2 = FactoryBot.create(:merchant)
+        cust1 = FactoryBot.create(:customer)
+        item1 = FactoryBot.create(:item, merchant_id: merch1.id, unit_price: 1000)
+        item2 = FactoryBot.create(:item, merchant_id: merch1.id, unit_price: 1000)
+        item3 = FactoryBot.create(:item, merchant_id: merch1.id, unit_price: 1000)
+        item4 = FactoryBot.create(:item, merchant_id: merch2.id, unit_price: 1000)
+
+        invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
+        invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, unit_price: item1.unit_price, quantity: 1)
+        invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice1.id, unit_price: item2.unit_price, quantity: 1)
+        invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item3.id, invoice_id: invoice1.id, unit_price: item4.unit_price, quantity: 1)
+        invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item4.id, invoice_id: invoice1.id, unit_price: item3.unit_price, quantity: 1)
+
+        invoice2 = FactoryBot.create(:invoice, customer_id: cust1.id)
+        invoice_item_5 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id, unit_price: item2.unit_price, quantity: 10)
+# require "pry"; binding.pry
+        expect(Invoice.revenue_for_invoice(invoice2.id)).to eq(100.00)
+        expect(Invoice.revenue_for_invoice(invoice1.id)).to eq(40.00)
+      end
+    end
+
 end
