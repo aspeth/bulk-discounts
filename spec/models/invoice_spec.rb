@@ -122,13 +122,13 @@ RSpec.describe Invoice, type: :model do
         item4 = FactoryBot.create(:item, merchant_id: merch2.id, unit_price: 1000)
 
         invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
-        invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, quantity: 1)
-        invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice1.id, quantity: 1)
-        invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item3.id, invoice_id: invoice1.id, quantity: 1)
-        invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item4.id, invoice_id: invoice1.id, quantity: 1)
+        invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, unit_price: item1.unit_price, quantity: 1)
+        invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice1.id, unit_price: item2.unit_price, quantity: 1)
+        invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item3.id, invoice_id: invoice1.id, unit_price: item4.unit_price, quantity: 1)
+        invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item4.id, invoice_id: invoice1.id, unit_price: item3.unit_price, quantity: 1)
 
         invoice2 = FactoryBot.create(:invoice, customer_id: cust1.id)
-        invoice_item_5 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id, quantity: 10)
+        invoice_item_5 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id, unit_price: item2.unit_price, quantity: 10)
 # require "pry"; binding.pry
         expect(Invoice.revenue_for_invoice(invoice2.id)).to eq(100.00)
         expect(Invoice.revenue_for_invoice(invoice1.id)).to eq(40.00)
