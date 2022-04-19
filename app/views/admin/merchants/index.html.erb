@@ -35,6 +35,7 @@
 <section id="top_five_merchant-<%= merchant.id %>">
 
   <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %><br>
+  Total Revenue: $<%= "%.2f" % merchant.total_revenue%>
 
 <section>
 <% end %>
