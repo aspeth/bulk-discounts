@@ -200,6 +200,55 @@ RSpec.describe "Admin Merchants Index Page" do
 
       end
 
+      it 'each top merchant has their best day for revenue' do
+        date_1 = 	"2015-02-08 09:54:09 UTC".to_datetime
+        date_2 = 	"2020-02-21 09:54:09 UTC".to_datetime
+        date_3 = 	"2018-03-12 09:54:09 UTC".to_datetime
+
+        #merchant_1 sold 9999 on 02/08/2015
+        merchant_1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now)
+        item_1 = create(:item, name: 'Elden Ring', unit_price: 9999, merchant_id: merchant_1.id)
+        customer_1 = create(:customer)
+        invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: date_1, updated_at: Time.now)
+        transaction_list_1 = Transaction.create!(credit_card_number: '103294023', credit_card_expiration_date: "342", result: 0, created_at: Time.now, updated_at: Time.now, invoice_id: invoice_1.id)
+        transaction_list_12 = Transaction.create!(credit_card_number: '103294023', credit_card_expiration_date: "342", result: 1, created_at: Time.now, updated_at: Time.now, invoice_id: invoice_1.id)
+
+        invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, status: 2, quantity: 1, unit_price: 9999)
+
+        #merchant_1 sold 8888 on 02/21/2020
+        item_2 = create(:item, name: 'Bolden Gloom', unit_price: 8888, merchant_id: merchant_1.id)
+        invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: date_2, updated_at: Time.now)
+        transaction_list_2 = Transaction.create!(credit_card_number: '103294023', credit_card_expiration_date: "342", result: 0, created_at: Time.now, updated_at: Time.now, invoice_id: invoice_2.id)
+
+        invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_2.id, status: 2, quantity: 1, unit_price: 8888)
+
+        #merchant_2 sold 7777 on 03/12/2018
+        merchant_2 = Merchant.create!(name: 'Souls Darkery', created_at: Time.now, updated_at: Time.now)
+        item_3 = create(:item, name: 'Orthopedic Insole', unit_price: 7777, merchant_id: merchant_2.id)
+        invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: date_3, updated_at: Time.now)
+        transaction_list_3 = Transaction.create!(credit_card_number: '103294023', credit_card_expiration_date: "342", result: 0, created_at: Time.now, updated_at: Time.now, invoice_id: invoice_3.id)
+
+        invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_3.id, status: 2, quantity: 1, unit_price: 7777)
+
+        #merchant_2 sold 7777 on 02/08/2015
+        item_4 = create(:item, name: 'Literally a Dog', unit_price: 7777, merchant_id: merchant_2.id)
+        invoice_4 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: date_1, updated_at: Time.now)
+        transaction_list_4 = Transaction.create!(credit_card_number: '103294023', credit_card_expiration_date: "342", result: 0, created_at: Time.now, updated_at: Time.now, invoice_id: invoice_4.id)
+
+        invoice_item_4 = create(:invoice_item, item_id: item_4.id, invoice_id: invoice_4.id, status: 2, quantity: 1, unit_price: 7777)
+
+        visit "/admin/merchants"
+        
+        #tests that top day of sales is returned
+        within "#top_five_merchant-#{merchant_1.id}" do
+          expect(page).to have_content("Top selling date was 02/08/2015")
+        end
+        
+        #tests that if two days have equal sales, most recent day is returned
+        within "#top_five_merchant-#{merchant_2.id}" do
+          expect(page).to have_content("Top selling date was 03/12/2018")
+        end
+      end
     end
 
     describe 'Merchant Creation Link' do

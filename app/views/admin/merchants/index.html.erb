@@ -35,7 +35,11 @@
 <section id="top_five_merchant-<%= merchant.id %>">
 
   <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %><br>
-  Total Revenue: $<%= "%.2f" % merchant.total_revenue%>
+
+  <p> Top selling date was <%= merchant.top_revenue_day.strftime('%m/%d/%Y') %> </p>
+
+ <p> Total Revenue: $<%= "%.2f" % merchant.total_revenue%> </p>
+
 
 <section>
 <% end %>
