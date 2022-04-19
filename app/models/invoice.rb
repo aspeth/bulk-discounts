@@ -10,9 +10,7 @@ class Invoice < ApplicationRecord
   validates_presence_of :created_at
   validates_presence_of :updated_at
 
-  def formatted_created_at
-    created_at.strftime('%A, %B %e, %Y')
-  end
+  
 
   def customer_name
     first_name = "#{customer.first_name}"
