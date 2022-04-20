@@ -13,18 +13,18 @@ RSpec.describe 'Merchant Item Index Page' do
 
   describe 'As a Merchant' do
 
-    it 'items index page shows my items' do
+    it 'items index page shows my items', :vcr  do
       expect(page).to have_content("Golden Rose")
       expect(page).to have_content('Dark Sole Shoes')
     end
 
-    it 'every item name is a link to its show page' do
+    it 'every item name is a link to its show page', :vcr  do
       click_link(@item1.name)
       expect(current_path).to eq("/merchants/#{@merch1.id}/items/#{@item1.id}")
 
     end
 
-    it 'has a button to enable or disable each item' do
+    it 'has a button to enable or disable each item', :vcr do
       merch1 = Merchant.create!(name: 'Jeffs Gold Blooms', created_at: Time.now, updated_at: Time.now)
       item1 = merch1.items.create!(name: "Golden Rose", description: "24k gold rose", unit_price: 100, created_at: Time.now, updated_at: Time.now, status: 1)
       item2 = merch1.items.create!(name: 'Dark Sole Shoes', description: "Dress shoes", unit_price: 200, created_at: Time.now, updated_at: Time.now)
@@ -48,7 +48,7 @@ RSpec.describe 'Merchant Item Index Page' do
     end
   end
 
-  it 'I see two sections, one for enabled items and one for disabled items and each item is listed in the appropriate section' do
+  it 'I see two sections, one for enabled items and one for disabled items and each item is listed in the appropriate section', :vcr  do
     merch1 = Merchant.create!(name: 'Jeffs Gold Blooms', created_at: Time.now, updated_at: Time.now)
     item1 = merch1.items.create!(name: "Golden Rose", description: "24k gold rose", unit_price: 100, created_at: Time.now, updated_at: Time.now, status: 1)
     item2 = merch1.items.create!(name: 'Dark Sole Shoes', description: "Dress shoes", unit_price: 200, created_at: Time.now, updated_at: Time.now)
@@ -70,7 +70,7 @@ RSpec.describe 'Merchant Item Index Page' do
     end
   end
 
-  it 'shows 5 most popular items as links to their show pages with total revenue listed next to each item' do
+  it 'shows 5 most popular items as links to their show pages with total revenue listed next to each item', :vcr  do
     merchant_1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now)
     customer_1 = create(:customer)
     item_9 = create(:item, name: 'Elden Ring', unit_price: 999, merchant_id: merchant_1.id)
@@ -125,7 +125,7 @@ RSpec.describe 'Merchant Item Index Page' do
     end
   end
 
-  it 'next to the top five items I see the date with the most sales for each item' do
+  it 'next to the top five items I see the date with the most sales for each item', :vcr  do
     merchant_1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now)
     customer_1 = create(:customer)
     item_9 = create(:item, name: 'Elden Ring', unit_price: 999, merchant_id: merchant_1.id)

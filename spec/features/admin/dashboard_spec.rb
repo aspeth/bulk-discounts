@@ -2,12 +2,12 @@ require "rails_helper"
 
 RSpec.describe 'admin dashboad spec' do
 
-  it 'has a header incidacting that i am on the admin dashboard' do
+  it 'has a header incidacting that i am on the admin dashboard', :vcr  do
     visit "/admin"
     expect(page).to have_content('Admin Dashboard')
   end
 
-  it 'has a link to the admin/merchant and admin/invoices indecise' do
+  it 'has a link to the admin/merchant and admin/invoices indecise', :vcr  do
     merch1 = create(:merchant)
     visit "/admin"
     expect(page). to have_link('Merchants (administrator)')
@@ -15,7 +15,7 @@ RSpec.describe 'admin dashboad spec' do
   end
 
   describe "admin dashboard statistics" do
-    it "#top_five_customers" do
+    it "#top_five_customers", :vcr  do
       merchant_1 = create(:merchant)
       item = create(:item, merchant_id: merchant_1.id)
       # customer_1, 6 succesful transactions and 1 failed
@@ -76,13 +76,13 @@ RSpec.describe 'admin dashboad spec' do
       @invoice_item_1 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_1.id, status: 2)
       @transactions_list_1 = FactoryBot.create_list(:transaction, 6, invoice_id: @invoice_1.id, result: 0)
       @failed_1 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
-      
+
       #customer_3 4 succesful
       @customer_3 = create(:customer)
       @invoice_3 = create(:invoice, status: 1,customer_id: @customer_3.id, created_at: "2020-03-25 09:54:09 UTC")
       @invoice_item_3 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_3.id, status: 1)
       @transactions_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: @invoice_3.id, result: 0)
-      
+
       # customer_2 5 succesful transactions
       @customer_2 = create(:customer)
       @invoice_2 = create(:invoice, status: 2, customer_id: @customer_2.id, created_at: "2016-03-25 09:54:09 UTC")
@@ -111,7 +111,7 @@ RSpec.describe 'admin dashboad spec' do
         visit "/admin"
     end
 
-    it 'has a section showing ids of invoices with unshipped items sorted from oldest to newest created_by ' do
+    it 'has a section showing ids of invoices with unshipped items sorted from oldest to newest created_by ', :vcr  do
       within"#incomplete_invoices"do
 
         expect(page).to have_content(@invoice_4.id)
@@ -129,7 +129,7 @@ RSpec.describe 'admin dashboad spec' do
       end
     end
 
-    it ' shows unshipped items sorted from oldest to newest created_by ' do
+    it ' shows unshipped items sorted from oldest to newest created_by ', :vcr  do
       within"#incomplete_invoices" do
         expect("#{@invoice_4.id}").to appear_before("#{@invoice_6.id}")
         expect("#{@invoice_6.id}").to appear_before("#{@invoice_3.id}")
