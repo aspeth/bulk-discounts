@@ -5,7 +5,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
   describe 'As a visitor' do
 
-    it 'I see the invoices id, status, formated created at date, customer first and last name' do
+    it 'I see the invoices id, status, formated created at date, customer first and last name', :vcr do
       merch1 = FactoryBot.create(:merchant)
       cust1 = FactoryBot.create(:customer)
       item1 = FactoryBot.create(:item, merchant_id: merch1.id)
@@ -22,7 +22,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       expect(page).to have_content("Customer Name: #{invoice1.customer_name}")
     end
 
-    it 'I see ONLY items that are mine and those items attributes' do
+    it 'I see ONLY items that are mine and those items attributes', :vcr do
       merch1 = FactoryBot.create(:merchant)
       merch2 = FactoryBot.create(:merchant)
       cust1 = FactoryBot.create(:customer)
@@ -65,7 +65,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     end
 
-    it 'I see the total revenue that will be generated from all my items on the invoice' do
+    it 'I see the total revenue that will be generated from all my items on the invoice', :vcr do
       merch1 = FactoryBot.create(:merchant)
       # merch2 = FactoryBot.create(:merchant)
       cust1 = FactoryBot.create(:customer)
@@ -87,7 +87,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       end
     end
 
-    it 'has a drop down menu for each invoice item status, to change said status' do
+    it 'has a drop down menu for each invoice item status, to change said status', :vcr do
       merch1 = FactoryBot.create(:merchant)
       cust1 = FactoryBot.create(:customer)
       item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id)

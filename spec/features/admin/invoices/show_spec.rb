@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'the admin invoice show page' do
-  it 'shows the invoice information including invoice id, status, created_at in readable format and customer first and last name' do
+  it 'shows the invoice information including invoice id, status, created_at in readable format and customer first and last name', :vcr do
     merchant_1 = Merchant.create!(name: "Elron Hubbard", created_at: Time.now, updated_at: Time.now)
     customer_1 = Customer.create!(first_name: "Squeaky", last_name: "Clean", created_at: Time.now, updated_at: Time.now)
     item_1 = FactoryBot.create(:item, merchant_id: merchant_1.id)
@@ -32,13 +32,13 @@ RSpec.describe 'the admin invoice show page' do
 
     end
 
-    it 'lists the item names on the invoice' do
+    it 'lists the item names on the invoice', :vcr do
       expect(page).to have_content("#{@item_1.name}")
       expect(page).to have_content("#{@item_11.name}")
       expect(page).to have_content("#{@item_111.name}")
     end
 
-    it 'shows the unit price and quantity sold for each item' do
+    it 'shows the unit price and quantity sold for each item', :vcr do
       expect(page).to have_content("Price: $1.01")
       expect(page).to have_content("Price: $2.01")
       expect(page).to have_content("Price: $3.00")
@@ -50,11 +50,11 @@ RSpec.describe 'the admin invoice show page' do
       expect(page).to have_content("Status: shipped")
     end
 
-    it 'will return total revenue from this invoice' do
+    it 'will return total revenue from this invoice', :vcr do
       expect(page).to have_content("Total Revenue: $14.03")
     end
 
-    it 'shows invoice status in a select field, and I can select a new status' do
+    it 'shows invoice status in a select field, and I can select a new status', :vcr do
       expect(page).to have_content("Invoice Status: in progress")
         within("#invoice_status_update") do
           expect(find_field('invoice_status').value).to eq('in progress')
