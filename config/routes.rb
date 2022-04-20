@@ -12,8 +12,13 @@ Rails.application.routes.draw do
 
   resources :admin, controller: 'admin/dashboard', only: [:index]
   namespace :admin do
+
     resources :invoices, only: [:index, :show]
     resources :merchants, except: [:destroy]
+
+ 
+    # resources :merchants
+
   end
 
   patch '/merchants/:merchant_id/invoice_items', to: 'invoice_items#update'
@@ -30,10 +35,14 @@ Rails.application.routes.draw do
   # get '/admin/merchants/new', to: 'admin/merchants#new'
   # post '/admin/merchants', to: 'admin/merchants#create'
 
+
   # get '/admin/merchants/:id', to: 'admin/merchants#show'
   # get '/admin/merchants/:id/edit', to: 'admin/merchants#edit'
   # patch '/admin/merchants/:id', to: 'admin/merchants#update'
   # get '/admin/invoices/:id', to: 'admin/invoices#show'
+
+  
+
   # get '/merchants/:id/invoices', to: 'merchant_invoices#index'
 
 end

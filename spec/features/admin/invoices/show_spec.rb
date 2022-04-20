@@ -29,6 +29,7 @@ RSpec.describe 'the admin invoice show page' do
       @invoice_item_111 = create(:invoice_item, item_id: @item_111.id, invoice_id: @invoice_1.id, status: 2, quantity: 3, unit_price: 300)
 
       visit "/admin/invoices/#{@invoice_1.id}"
+
     end
 
     it 'lists the item names on the invoice' do
@@ -51,6 +52,19 @@ RSpec.describe 'the admin invoice show page' do
 
     it 'will return total revenue from this invoice' do
       expect(page).to have_content("Total Revenue: $14.03")
+    end
+
+    it 'shows invoice status in a select field, and I can select a new status' do
+      expect(page).to have_content("Invoice Status: in progress")
+        within("#invoice_status_update") do
+          expect(find_field('invoice_status').value).to eq('in progress')
+          select('completed')
+          click_button('Submit')
+        end
+      expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
+        within("#invoice_status_update") do
+          expect(page).to have_content("Invoice Status: completed")
+        end
     end
   end
 end
