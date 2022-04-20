@@ -57,7 +57,7 @@ RSpec.describe 'the admin invoice show page' do
     it 'shows invoice status in a select field, and I can select a new status' do
       expect(page).to have_content("Invoice Status: in progress")
         within("#invoice_status_update") do
-          # expect(find_field('invoice_status').value).to eq('In progress')
+          expect(find_field('invoice_status').value).to eq('in progress')
           select('completed')
           click_button('Submit')
         end
