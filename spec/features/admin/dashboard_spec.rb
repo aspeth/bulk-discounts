@@ -2,12 +2,12 @@ require "rails_helper"
 
 RSpec.describe 'admin dashboad spec' do
 
-  it 'has a header incidacting that i am on the admin dashboard' do
+  it 'has a header incidacting that i am on the admin dashboard', :vcr do
     visit "/admin"
     expect(page).to have_content('Admin Dashboard')
   end
 
-  it 'has a link to the admin/merchant and admin/invoices indecise' do
+  it 'has a link to the admin/merchant and admin/invoices indecise', :vcr do
     merch1 = create(:merchant)
     visit "/admin"
     expect(page). to have_link('Merchants (administrator)')
@@ -15,7 +15,7 @@ RSpec.describe 'admin dashboad spec' do
   end
 
   describe "admin dashboard statistics" do
-    it "#top_five_customers" do
+    it "#top_five_customers", :vcr do
       merchant_1 = create(:merchant)
       item = create(:item, merchant_id: merchant_1.id)
       # customer_1, 6 succesful transactions and 1 failed
@@ -111,7 +111,7 @@ RSpec.describe 'admin dashboad spec' do
         visit "/admin"
     end
 
-    it 'has a section showing ids of invoices with unshipped items sorted from oldest to newest created_by ' do
+    it 'has a section showing ids of invoices with unshipped items sorted from oldest to newest created_by ', :vcr do
       within"#incomplete_invoices"do
 
         expect(page).to have_content(@invoice_4.id)
@@ -129,7 +129,7 @@ RSpec.describe 'admin dashboad spec' do
       end
     end
 
-    it ' shows unshipped items sorted from oldest to newest created_by ' do
+    it ' shows unshipped items sorted from oldest to newest created_by ', :vcr do
       within"#incomplete_invoices" do
         expect("#{@invoice_4.id}").to appear_before("#{@invoice_6.id}")
         expect("#{@invoice_6.id}").to appear_before("#{@invoice_3.id}")
