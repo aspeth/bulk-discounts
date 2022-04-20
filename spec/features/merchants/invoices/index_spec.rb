@@ -33,7 +33,7 @@ RSpec.describe 'Merchant Invoice Index Page' do
   end
   describe 'As a visitor' do
 
-    it 'I see all invoices with atleast one of my items, I see the invoice ID and links', :vcr do
+    it 'I see all invoices with atleast one of my items, I see the invoice ID and links' do
 
       visit "/merchants/#{@merch1.id}/invoices"
 
@@ -45,7 +45,7 @@ RSpec.describe 'Merchant Invoice Index Page' do
 
     end
 
-    it 'All Invoice IDs link to that invoices show page', :vcr do
+    it 'All Invoice IDs link to that invoices show page' do
       visit "/merchants/#{@merch1.id}/invoices"
 
       within "#invoice_id-#{@invoice1.id}" do
@@ -61,7 +61,7 @@ RSpec.describe 'Merchant Invoice Index Page' do
       # save_and_open_page
     end
 
-    it 'Clicking one of the invoice id link takes you to that invoice show page', :vcr do
+    it 'Clicking one of the invoice id link takes you to that invoice show page' do
       visit "/merchants/#{@merch1.id}/invoices"
       within "#invoice_id-#{@invoice2.id}" do
         click_link "#{@invoice2.id}"

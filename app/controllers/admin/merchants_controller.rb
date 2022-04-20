@@ -13,7 +13,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
-
+  
   end
 
   def create
@@ -39,6 +39,6 @@ class Admin::MerchantsController < ApplicationController
 
     private
       def merchant_params
-        params.permit(:id, :name, :status, :created_at, :updated_at)
+       params.permit(:id, :name, :status, :created_at, :updated_at)
     end
 end
