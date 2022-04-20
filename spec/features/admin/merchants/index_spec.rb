@@ -5,7 +5,7 @@ RSpec.describe "Admin Merchants Index Page" do
 
   describe 'As a Visitor' do
 
-    it 'I see the name of each merchant in the system', :vcr do
+    it 'I see the name of each merchant in the system' do
 
       date1 = "2020-02-08 09:54:09 UTC".to_datetime
       date2 = "2017-03-16 04:04:09 UTC".to_datetime
@@ -31,7 +31,7 @@ RSpec.describe "Admin Merchants Index Page" do
 
     end
 
-    it 'I see a section for enabled/disabled merchants, each merchant in appropriate section', :vcr do
+    it 'I see a section for enabled/disabled merchants, each merchant in appropriate section' do
       merch1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now, status: 0)
       merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now, status: 1)
       merch3 = Merchant.create!(name: 'Souls Darkery', created_at: Time.now, updated_at: Time.now, status: 0)
@@ -67,7 +67,7 @@ RSpec.describe "Admin Merchants Index Page" do
       end
     end
 
-    it 'each merchants name is a link to their admin/merchants show page', :vcr do
+    it 'each merchants name is a link to their admin/merchants show page' do
       merch1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now, status: 0)
       merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now, status: 1)
       merch3 = Merchant.create!(name: 'Souls Darkery', created_at: Time.now, updated_at: Time.now, status: 0)
@@ -86,7 +86,7 @@ RSpec.describe "Admin Merchants Index Page" do
       expect(current_path).to eq("/admin/merchants/#{merch3.id}")
     end
     
-    it 'each merchant has a button to enable or disable them', :vcr do
+    it 'each merchant has a button to enable or disable them' do
       merch1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now, status: 0)
       merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now, status: 1)
       merch3 = Merchant.create!(name: 'Souls Darkery', created_at: Time.now, updated_at: Time.now, status: 0)
@@ -113,7 +113,7 @@ RSpec.describe "Admin Merchants Index Page" do
 
     describe 'Top 5 Merchants by revenue are shown' do
       
-      it 'I see the name of each merchant, their total revenue, and a link to their show page', :vcr do
+      it 'I see the name of each merchant, their total revenue, and a link to their show page' do
 
         merchant_1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now)
         item_1 = create(:item, name: 'Elden Ring', unit_price: 9999, merchant_id: merchant_1.id)
@@ -200,7 +200,7 @@ RSpec.describe "Admin Merchants Index Page" do
 
       end
 
-      it 'each top merchant has their best day for revenue', :vcr do
+      it 'each top merchant has their best day for revenue' do
         date_1 = 	"2015-02-08 09:54:09 UTC".to_datetime
         date_2 = 	"2020-02-21 09:54:09 UTC".to_datetime
         date_3 = 	"2018-03-12 09:54:09 UTC".to_datetime
@@ -253,7 +253,7 @@ RSpec.describe "Admin Merchants Index Page" do
 
     describe 'Merchant Creation Link' do
       
-      it 'has a link to create a new merchant, link takes to a new page', :vcr do
+      it 'has a link to create a new merchant, link takes to a new page' do
         merchant_1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now, status: 0)
         merchant_2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now, status: 1)
                 
