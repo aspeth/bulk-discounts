@@ -8,13 +8,13 @@ RSpec.describe 'the item edit page' do
     visit edit_merchant_item_path(@merchant1, @item1)
   end
 
-  it 'shows the form with current item info', :vcr do
+  it 'shows the form with current item info' do
     expect(page).to have_field('Name', with: @item1.name)
     expect(page).to have_field('Description', with: @item1.description)
     expect(page).to have_field('Unit Price', with: @item1.unit_price)
   end
 
-  it 'updates the item info after clicking the update button', :vcr do
+  it 'updates the item info after clicking the update button' do
     fill_in('Name', with: 'Two-handed back scratcher')
     fill_in('Description', with: 'Finally everyone can scratch their backs with two hands')
     fill_in('Unit Price', with: 35)
