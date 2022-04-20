@@ -12,20 +12,20 @@ RSpec.describe 'Merchant Dashboard Page' do
 
   describe 'As a Merchant' do
 
-    it 'I visit my merchant dashboard, and see the name of my merchant' do
+    it 'I visit my merchant dashboard, and see the name of my merchant', :vcr  do
       expect(page).to have_content("Jeffs Gold Blooms")
       expect(page).to_not have_content('Miyazakis Dark Souls')
     end
 
-    it 'I see a link to my merchant items index' do
+    it 'I see a link to my merchant items index', :vcr  do
       expect(page).to have_link("My Items")
     end
 
-    it 'I see a link to my merchant invoice index' do
+    it 'I see a link to my merchant invoice index', :vcr  do
       expect(page).to have_link("My Invoices")
     end
 
-    it 'lists top 5 customers and number of successful transactions for each customer' do
+    it 'lists top 5 customers and number of successful transactions for each customer', :vcr  do
       merchant_1 = Merchant.create!(name: 'merchant_1', created_at: Time.now, updated_at: Time.now)
       item_1 = create(:item, merchant_id: merchant_1.id, unit_price: 750, name: 'item_1_name')
 
@@ -71,9 +71,9 @@ RSpec.describe 'Merchant Dashboard Page' do
       end
     end
 
-    it "displays items that are ready to ship" do
+    it "displays items that are ready to ship", :vcr  do
       merchant_1 = create(:merchant)
-      
+
       item_1 = create(:item, merchant_id: merchant_1.id)
       item_2 = create(:item, merchant_id: merchant_1.id)
       customer = create(:customer)
@@ -82,24 +82,24 @@ RSpec.describe 'Merchant Dashboard Page' do
       invoice_item_2 = create(:invoice_item, status: 2, item_id: item_2.id, invoice_id: invoice.id)
       visit "/merchants/#{merchant_1.id}/dashboard"
       expect(page).to have_content("Items Ready to Ship")
-      
+
       within "#items_ready_to_ship" do
         expect(page).to have_content(item_1.name)
         expect(page).to_not have_content(item_2.name)
       end
-      
+
       within "#invoice-item-#{invoice_item_1.id}" do
         expect(page).to have_content(item_1.name)
         expect(page).to have_link("#{invoice.id}")
       end
-      
+
       click_link "#{invoice.id}"
       expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice.id}")
     end
-    
-    it "displays created_at date for each invoice in 'Ready to Ship' and they are ordered oldest to newest" do
+
+    it "displays created_at date for each invoice in 'Ready to Ship' and they are ordered oldest to newest", :vcr  do
       merchant_1 = create(:merchant)
-      
+
       item_1 = create(:item, merchant_id: merchant_1.id)
       item_2 = create(:item, merchant_id: merchant_1.id)
       item_3 = create(:item, merchant_id: merchant_1.id)
@@ -113,9 +113,9 @@ RSpec.describe 'Merchant Dashboard Page' do
       invoice_item_1 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
       invoice_item_2 = create(:invoice_item, status: 0, item_id: item_2.id, invoice_id: invoice_2.id)
       invoice_item_3 = create(:invoice_item, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
-      
+
       visit "/merchants/#{merchant_1.id}/dashboard"
-      
+
       within "#invoice-item-#{invoice_item_1.id}" do
         expect(page).to have_content("February 8, 2015")
       end
