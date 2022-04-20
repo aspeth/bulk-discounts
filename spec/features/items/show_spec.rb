@@ -10,13 +10,13 @@ RSpec.describe 'the merchant item show page' do
   end
 
   describe 'page display' do
-    it 'shows all the items attributes', :vcr do
+    it 'shows all the items attributes' do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@item1.description)
       expect(page).to have_content(@item1.unit_price)
     end
 
-    it 'has a link to the item update page', :vcr do
+    it 'has a link to the item update page' do
       click_link("Update This Item")
     end
 
