@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     # resources :merchants
 
   end
-
+  # patch 'admin/merchants/:id', to: 'admin/merchants#update'
   patch '/merchants/:merchant_id/invoice_items', to: 'invoice_items#update'
 
   # get '/admin/invoices', to: 'admin/invoices#index'
