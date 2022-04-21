@@ -1,9 +1,14 @@
 class Contributor
-  attr_reader :login
+  attr_reader :names
 
   def initialize(data)
-    require 'pry'; binding.pry
-    @login = data[0][:login]
+    @names = []
+    # require 'pry'; binding.pry
+    data.each do |guy|
+      @names << guy[:login]
+    end
+    # require 'pry'; binding.pry
+    # @login = data[0][:login]
     #@login = {}
     # data.map do |contributor|
     #   if !@login.key?(contributor)
