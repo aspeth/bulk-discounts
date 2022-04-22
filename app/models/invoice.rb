@@ -26,4 +26,8 @@ class Invoice < ApplicationRecord
     invoice = Invoice.find(invoice_id)
     invoice.invoice_items.sum('unit_price * quantity') / 100.to_f
   end
+
+  def discounted_revenue
+    require 'pry'; binding.pry
+  end
 end

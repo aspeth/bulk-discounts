@@ -86,9 +86,4 @@ class Merchant < ApplicationRecord
     .order(total_revenue: :desc, created_at: :desc)
     .first.created_at.to_datetime
   end
-
-  def discounted_revenue_for_invoice(invoice_id)
-    invoice = Invoice.find(invoice_id)
-    invoice.invoice_items.sum('unit_price * quantity') / 100.to_f
-  end
 end
