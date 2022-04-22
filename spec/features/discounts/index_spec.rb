@@ -25,13 +25,36 @@ RSpec.describe 'Merchant Discount Index' do
 
     expect(current_path).to eq("/merchants/#{merch1.id}/discounts/#{discount_1.id}")
   end
+  
+  it "has a link to a form to add a new discount" do
+    merch1 = Merchant.create!(name: 'Jeffs Gold Blooms', created_at: Time.now, updated_at: Time.now)
+    merch2 = Merchant.create!(name: 'Miyazakis Dark Souls', created_at: Time.now, updated_at: Time.now)
+    discount_1 = Discount.create!(percent: 10, threshold: 20, merchant_id: merch1.id)
+    discount_2 = Discount.create!(percent: 20, threshold: 30, merchant_id: merch1.id)
+    discount_3 = Discount.create!(percent: 15, threshold: 25, merchant_id: merch2.id)
+    
+    visit "/merchants/#{merch1.id}/discounts"
+
+    expect(page).to_not have_content("Percent: 15%")
+    expect(page).to_not have_content("Threshold: 25")
+    
+    click_link 'New Discount'
+    
+    fill_in 'Percent', with: '15'
+    fill_in 'Threshold', with: '25'
+    click_button 'Submit'
+    
+    expect(current_path).to eq("/merchants/#{merch1.id}/discounts")
+    expect(page).to have_content("Percent: 15%")
+    expect(page).to have_content("Threshold: 25")
+  end
 end
 
-#    As a merchant
-# When I visit my merchant dashboard
-# Then I see a link to view all my discounts
+# As a merchant
+# When I visit my bulk discounts index
+# Then I see a link to create a new discount
 # When I click this link
-# Then I am taken to my bulk discounts index page
-# Where I see all of my bulk discounts including their
-# percentage discount and quantity thresholds
-# And each bulk discount listed includes a link to its show page
+# Then I am taken to a new page where I see a form to add a new bulk discount
+# When I fill in the form with valid data
+# Then I am redirected back to the bulk discount index
+# And I see my new bulk discount listed
