@@ -1,6 +1,6 @@
 class GitHubService < BaseService
   def self.get_repo_data
-    response = conn('https://api.github.com').get('/repos/alexGrandolph/little-esty-shop')
+    response = conn('https://api.github.com').get('/repos/aspeth/bulk-discounts')
     get_json(response)
   end
   
