@@ -27,24 +27,26 @@ it "has the bulk discount's percentage and threshold" do
     discount_2 = Discount.create!(percent: 20, threshold: 30, merchant_id: merch1.id)
     discount_3 = Discount.create!(percent: 15, threshold: 25, merchant_id: merch2.id)
     
-    visit "/merchants/#{merch1.id}/discounts"
+    visit "/merchants/#{merch1.id}/discounts/#{discount_1.id}"
 
     expect(page).to_not have_content("Percent: 40%")
     expect(page).to_not have_content("Threshold: 50")
     
     click_link 'Edit Discount'
+
+    expect(page).to have_field('Percent', with: "10")
+    expect(page).to have_field('Threshold', with: "20")
     
     fill_in 'Percent', with: '40'
     fill_in 'Threshold', with: '50'
-    click_button 'Submit'
+    click_button 'Update'
     
-    expect(current_path).to eq("/merchants/#{merch1.id}/discounts")
+    expect(current_path).to eq("/merchants/#{merch1.id}/discounts/#{discount_1.id}")
     expect(page).to have_content("Percent: 40%")
     expect(page).to have_content("Threshold: 50")
     expect(page).to_not have_content("Percent: 10%")
     expect(page).to_not have_content("Threshold: 20")
   end
-
 end
 # As a merchant
 # When I visit my bulk discount show page

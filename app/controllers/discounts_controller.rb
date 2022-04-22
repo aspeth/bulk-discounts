@@ -4,6 +4,7 @@ class DiscountsController < ApplicationController
   end
   
   def show
+    @merchant = Merchant.find(params[:merchant_id])
     @discount = Discount.find(params[:id])
   end
   
@@ -31,6 +32,24 @@ class DiscountsController < ApplicationController
     discount = Discount.find(params[:id])
     discount.destroy
     redirect_to "/merchants/#{merchant.id}/discounts"
+  end
+
+  def edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = Discount.find(params[:id])
+  end
+
+  def update
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = Discount.find(params[:id])
+    
+    if params[:percent].to_i > 100 || params[:percent].to_i < 0
+      flash[:notice] = "Error: Please enter a whole number between 1 and 100"
+      render :edit
+    else
+      @discount.update(discount_params)
+      redirect_to "/merchants/#{@merchant.id}/discounts/#{@discount.id}"
+    end
   end
 
     private
