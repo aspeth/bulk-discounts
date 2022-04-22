@@ -131,19 +131,7 @@ RSpec.describe 'Merchant Dashboard Page' do
     end
 
     it "has a link to view all discounts that goes to discounts#index" do
-      discount_1 = Discount.create!(percent: 10, threshold: 20, merchant_id: @merch1.id)
-      discount_2 = Discount.create!(percent: 20, threshold: 30, merchant_id: @merch1.id)
-      discount_3 = Discount.create!(percent: 15, threshold: 25, merchant_id: @merch2.id)
-
-      within "#discounts-#{discount_1.id}" do
-        expect(page).to have_content("Discount: 10%")
-        expect(page).to have_content("Threshold: 20")
-      end
-      
-      expect(page).to_not have_content("Discount: 15%")
-      expect(page).to_not have_content("Threshold: 25")
-
-      click_link "See All Discounts"
+      click_link "My Discounts"
       expect(current_path).to eq("/merchants/#{@merch1.id}/discounts")
     end
 #    As a merchant
@@ -157,3 +145,14 @@ RSpec.describe 'Merchant Dashboard Page' do
   end
 
 end
+      # discount_1 = Discount.create!(percent: 10, threshold: 20, merchant_id: @merch1.id)
+      # discount_2 = Discount.create!(percent: 20, threshold: 30, merchant_id: @merch1.id)
+      # discount_3 = Discount.create!(percent: 15, threshold: 25, merchant_id: @merch2.id)
+
+      # within "#discounts-#{discount_1.id}" do
+      #   expect(page).to have_content("Discount: 10%")
+      #   expect(page).to have_content("Threshold: 20")
+      # end
+      
+      # expect(page).to_not have_content("Discount: 15%")
+      # expect(page).to_not have_content("Threshold: 25")
