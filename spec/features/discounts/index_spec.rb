@@ -13,7 +13,6 @@ RSpec.describe 'Merchant Discount Index' do
     discount_3 = Discount.create!(percent: 15, threshold: 25, merchant_id: merch2.id)
     
     visit "/merchants/#{merch1.id}/discounts"
-    save_and_open_page
 
     expect(page).to_not have_content("Percent: 15%")
     expect(page).to_not have_content("Threshold: 25")
