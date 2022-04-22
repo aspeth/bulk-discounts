@@ -1,4 +1,4 @@
-<%= @merchant.discounts.each do |discount| %>
+<% @merchant.discounts.each do |discount| %>
 <div id="discounts-<%= discount.id %>">
   <h3> <%= link_to "Discount #{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %> </h3>
   <p> Percent: <%= discount.percent %>% </p>
