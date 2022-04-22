@@ -134,25 +134,5 @@ RSpec.describe 'Merchant Dashboard Page' do
       click_link "My Discounts"
       expect(current_path).to eq("/merchants/#{@merch1.id}/discounts")
     end
-#    As a merchant
-# When I visit my merchant dashboard
-# Then I see a link to view all my discounts
-# When I click this link
-# Then I am taken to my bulk discounts index page
-# Where I see all of my bulk discounts including their
-# percentage discount and quantity thresholds
-# And each bulk discount listed includes a link to its show page
   end
-
 end
-      # discount_1 = Discount.create!(percent: 10, threshold: 20, merchant_id: @merch1.id)
-      # discount_2 = Discount.create!(percent: 20, threshold: 30, merchant_id: @merch1.id)
-      # discount_3 = Discount.create!(percent: 15, threshold: 25, merchant_id: @merch2.id)
-
-      # within "#discounts-#{discount_1.id}" do
-      #   expect(page).to have_content("Discount: 10%")
-      #   expect(page).to have_content("Threshold: 20")
-      # end
-      
-      # expect(page).to_not have_content("Discount: 15%")
-      # expect(page).to_not have_content("Threshold: 25")
