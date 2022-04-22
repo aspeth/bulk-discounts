@@ -48,13 +48,21 @@ RSpec.describe 'Merchant Discount Index' do
     expect(page).to have_content("Percent: 15%")
     expect(page).to have_content("Threshold: 25")
   end
-end
+  
+  it "displays error if percent > 100 or < 0" do
+    merch1 = Merchant.create!(name: 'Jeffs Gold Blooms', created_at: Time.now, updated_at: Time.now)
+    merch2 = Merchant.create!(name: 'Miyazakis Dark Souls', created_at: Time.now, updated_at: Time.now)
+    discount_1 = Discount.create!(percent: 10, threshold: 20, merchant_id: merch1.id)
+    discount_2 = Discount.create!(percent: 20, threshold: 30, merchant_id: merch1.id)
+    discount_3 = Discount.create!(percent: 15, threshold: 25, merchant_id: merch2.id)
+    
+    visit "/merchants/#{merch1.id}/discounts"
 
-# As a merchant
-# When I visit my bulk discounts index
-# Then I see a link to create a new discount
-# When I click this link
-# Then I am taken to a new page where I see a form to add a new bulk discount
-# When I fill in the form with valid data
-# Then I am redirected back to the bulk discount index
-# And I see my new bulk discount listed
+    click_link 'New Discount'
+    
+    fill_in 'Percent', with: '101'
+    click_button 'Submit'
+    save_and_open_page
+    expect(page).to have_content("Error: Please enter a whole number between 1 and 100")
+  end
+end
