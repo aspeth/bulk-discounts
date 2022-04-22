@@ -96,7 +96,7 @@ RSpec.describe 'Merchant Discount Index' do
     expect(page).to have_content("Threshold: 20")
 
     within "#discounts-#{discount_1.id}" do
-      click_link "Delete Discount #{discount_1.id}"
+      click_link "Delete Discount"
     end
     
     expect(current_path).to eq("/merchants/#{merch1.id}/discounts")
