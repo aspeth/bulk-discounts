@@ -3,6 +3,7 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items, dependent: :destroy
   belongs_to :customer
   has_many :transactions, dependent: :destroy
+  has_many :merchants, through: :items
 
   enum status: [:cancelled, 'in progress', :completed]
 
@@ -28,6 +29,8 @@ class Invoice < ApplicationRecord
   end
 
   def discounted_revenue
-    require 'pry'; binding.pry
+    wip = invoice_items.joins(:discounts)
+                        .where('invoice_items.quantity >= discounts.threshold')
+                        require 'pry'; binding.pry
   end
 end

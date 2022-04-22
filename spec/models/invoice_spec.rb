@@ -129,7 +129,7 @@ RSpec.describe Invoice, type: :model do
 
         invoice2 = FactoryBot.create(:invoice, customer_id: cust1.id)
         invoice_item_5 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id, unit_price: item2.unit_price, quantity: 10)
-# require "pry"; binding.pry
+
         expect(Invoice.revenue_for_invoice(invoice2.id)).to eq(100.00)
         expect(Invoice.revenue_for_invoice(invoice1.id)).to eq(40.00)
       end
