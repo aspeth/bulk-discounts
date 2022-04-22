@@ -10,15 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_22_022643) do
+ActiveRecord::Schema.define(version: 2022_04_22_155607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "bulk_discounts", force: :cascade do |t|
-    t.integer "percent"
-    t.integer "threshold"
-  end
 
   create_table "customers", force: :cascade do |t|
     t.string "first_name"
