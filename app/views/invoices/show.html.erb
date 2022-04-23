@@ -34,5 +34,5 @@
 
 <h3>Discounted Revenue From This Invoice:</h3>
 <section id="discounted_revenue">
-  Revenue: $<%= (@invoice.discounted_revenue / 100.to_f).round(2) %>
+  Revenue: $<%= (@invoice.discounted_revenue_for_merchant(@merchant) / 100.to_f).round(2) %>
 </section>
