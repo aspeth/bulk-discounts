@@ -136,7 +136,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
     
     expect(page).to have_content("Discounted Revenue From This Invoice:")
     within "#discounted_revenue" do
-      expect(page).to have_content("Revenue: $.53")
+      expect(page).to have_content("Revenue: $0.53")
     end
   end
 end

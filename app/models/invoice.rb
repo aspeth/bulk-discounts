@@ -11,8 +11,6 @@ class Invoice < ApplicationRecord
   validates_presence_of :created_at
   validates_presence_of :updated_at
 
-  
-
   def customer_name
     first_name = "#{customer.first_name}"
     last_name ="#{customer.last_name}"
@@ -29,8 +27,10 @@ class Invoice < ApplicationRecord
   end
 
   def discounted_revenue
-    wip = invoice_items.joins(:discounts)
-                        .where('invoice_items.quantity >= discounts.threshold')
-                        require 'pry'; binding.pry
+    invoice_items.joins(:discounts)
+    .where('invoice_items.quantity >= discounts.threshold')
+    .select('invoice_items.id, max(invoice_items.quantity * invoice_items.unit_price * (discounts.percent / 100.0)) as total_discount')
+    .group('invoice_items.id')
+    .sum(&:total_discount)
   end
 end
