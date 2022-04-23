@@ -86,7 +86,4 @@ class Merchant < ApplicationRecord
     .order(total_revenue: :desc, created_at: :desc)
     .first.created_at.to_datetime
   end
-
-  
-
 end

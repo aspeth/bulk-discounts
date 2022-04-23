@@ -129,10 +129,28 @@ RSpec.describe Invoice, type: :model do
 
         invoice2 = FactoryBot.create(:invoice, customer_id: cust1.id)
         invoice_item_5 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id, unit_price: item2.unit_price, quantity: 10)
-# require "pry"; binding.pry
+
         expect(Invoice.revenue_for_invoice(invoice2.id)).to eq(100.00)
         expect(Invoice.revenue_for_invoice(invoice1.id)).to eq(40.00)
       end
     end
+
+  it "#discounted_revenue" do
+    merch1 = Merchant.create!(name: "Carl's Castles", created_at: Time.now, updated_at: Time.now)
+
+    cust1 = Customer.create!(first_name: "Carl", last_name: "the Cat", created_at: Time.now, updated_at: Time.now)
+    item1 = Item.create!(name: "Big Castle", description: "Our biggest castle", unit_price: 100, merchant_id: merch1.id, created_at: Time.now, updated_at: Time.now)
+    item2 = Item.create!(name: "Medium Castle", description: "Our most medium castle", unit_price: 50, merchant_id: merch1.id, created_at: Time.now, updated_at: Time.now)
+    item3 = Item.create!(name: "Small Castle", description: "Our smallest castle", unit_price: 25, merchant_id: merch1.id, created_at: Time.now, updated_at: Time.now)
+
+    invoice1 = Invoice.create!(customer_id: cust1.id, created_at: Time.now, updated_at: Time.now)
+    invoice_item_1 = InvoiceItem.create!(item_id: item1.id, unit_price: item1.unit_price, quantity: 3, invoice_id: invoice1.id, created_at: Time.now, updated_at: Time.now)
+    invoice_item_2 = InvoiceItem.create!(item_id: item2.id, unit_price: item2.unit_price, quantity: 3, invoice_id: invoice1.id, created_at: Time.now, updated_at: Time.now)
+    invoice_item_3 = InvoiceItem.create!(item_id: item3.id, unit_price: item3.unit_price, quantity: 3, invoice_id: invoice1.id, created_at: Time.now, updated_at: Time.now)
+
+    discount_1 = merch1.discounts.create!(percent: 10, threshold: 3)
+  
+    expect(invoice1.discounted_revenue).to eq(52.5)
+  end
 
 end
