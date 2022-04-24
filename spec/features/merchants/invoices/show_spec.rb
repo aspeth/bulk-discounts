@@ -140,7 +140,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
     end
   end
 
-  it "has a section for both total and discounted revenue" do
+  it "has a section for revenue after discount" do
     merch1 = Merchant.create!(name: "Carl's Castles", created_at: Time.now, updated_at: Time.now)
 
     cust1 = Customer.create!(first_name: "Carl", last_name: "the Cat", created_at: Time.now, updated_at: Time.now)
@@ -156,9 +156,9 @@ RSpec.describe 'Merchant Invoice Show Page' do
     discount_1 = merch1.discounts.create!(percent: 10, threshold: 3)
   
     visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
-    expect(page).to have_content("Total Revenue From This Invoice:")
+    expect(page).to have_content("Revenue From This Invoice After Discount:")
     within "#revenue_after_discount" do
-      expect(page).to have_content("Revenue: $4.72")
+      expect(page).to have_content("Revenue: $4.73")
     end
   end
 end
