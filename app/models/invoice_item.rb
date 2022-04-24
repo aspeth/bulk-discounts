@@ -13,7 +13,11 @@ class InvoiceItem < ApplicationRecord
     unit_price / 100.to_f
   end
 
-  # def incomplete_invoices
-  # invoice_items.where(status: [0,1])
-  # end
+  def has_discount?
+    !discounts.where('threshold <= ?', quantity).empty?
+  end
+
+  def discount
+    discounts.where('threshold <= ?', quantity).order(:percent).first
+  end
 end
