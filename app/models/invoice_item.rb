@@ -18,6 +18,6 @@ class InvoiceItem < ApplicationRecord
   end
 
   def discount
-    discounts.where('threshold <= ?', quantity).order(:percent).limit(1)
+    discounts.where('threshold <= ?', quantity).order(:percent).first
   end
 end
