@@ -9,8 +9,8 @@
 <% @merchant.current_invoice_items(@invoice.id).each do |invoice_item| %>
 <section id="invoice_item-<%= invoice_item.id %>">
 
-<% if discounted_items.include?(invoice_item) %>
-  <%= link_to "Discount Applied", "/merchants/#{@merchant.id}/discounts" %>
+<% if invoice_item.has_discount? %>
+  <%= link_to "Discount Applied", "/merchants/#{@merchant.id}/discounts/#{invoice_item.discount[0].id}" %>
 <% end %>
   Item Name: <%= invoice_item.item.name %><br>
   Quantity Ordered: <%= invoice_item.quantity %><br>
