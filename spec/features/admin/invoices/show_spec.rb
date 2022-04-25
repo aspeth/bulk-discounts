@@ -95,7 +95,7 @@ RSpec.describe 'the admin invoice show page' do
       expect(page).to have_content("Revenue From This Invoice After Discount:")
 
       within "#revenue_after_discount" do
-        expect(page).to have_content("Revenue: $6.25")
+        expect(page).to have_content("Revenue: $7.95")
       end
     end
   end

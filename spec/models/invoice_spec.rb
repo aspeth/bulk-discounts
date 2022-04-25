@@ -256,22 +256,21 @@ RSpec.describe Invoice, type: :model do
       item1 = merch1.items.create!(name: "Big Castle", description: "Our biggest castle", unit_price: 100, created_at: Time.now, updated_at: Time.now)
       item2 = merch1.items.create!(name: "Medium Castle", description: "Our most medium castle", unit_price: 50, created_at: Time.now, updated_at: Time.now)
       item3 = merch1.items.create!(name: "Small Castle", description: "Our smallest castle", unit_price: 25, created_at: Time.now, updated_at: Time.now)
-      item4 = merch2.items.create!(name: "Big Castle", description: "Our biggest castle", unit_price: 100, created_at: Time.now, updated_at: Time.now)
-      item5 = merch2.items.create!(name: "Medium Castle", description: "Our most medium castle", unit_price: 50, created_at: Time.now, updated_at: Time.now)
-      item6 = merch2.items.create!(name: "Small Castle", description: "Our smallest castle", unit_price: 25, created_at: Time.now, updated_at: Time.now)
+      item4 = merch2.items.create!(name: "Baby Shoes", description: "Babies don't need shoes", unit_price: 50, created_at: Time.now, updated_at: Time.now)
+      item5 = merch2.items.create!(name: "Baby Socks", description: "They don't need socks either", unit_price: 25, created_at: Time.now, updated_at: Time.now)
 
       invoice1 = Invoice.create!(customer_id: cust1.id, created_at: Time.now, updated_at: Time.now)
       invoice_item_1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, unit_price: item1.unit_price, quantity: 3, created_at: Time.now, updated_at: Time.now)
-      invoice_item_1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, unit_price: item2.unit_price, quantity: 3, created_at: Time.now, updated_at: Time.now)
-      invoice_item_2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, unit_price: item3.unit_price, quantity: 2, created_at: Time.now, updated_at: Time.now)
+      invoice_item_2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, unit_price: item2.unit_price, quantity: 3, created_at: Time.now, updated_at: Time.now)
+      invoice_item_3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, unit_price: item3.unit_price, quantity: 2, created_at: Time.now, updated_at: Time.now)
       invoice_item_4 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item4.id, unit_price: item4.unit_price, quantity: 3, created_at: Time.now, updated_at: Time.now)
       invoice_item_5 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item5.id, unit_price: item5.unit_price, quantity: 2, created_at: Time.now, updated_at: Time.now)
 
-      discount_1 = merch1.discounts.create!(percent: 30, threshold: 5)
+      discount_1 = merch1.discounts.create!(percent: 50, threshold: 1)
       discount_2 = merch1.discounts.create!(percent: 10, threshold: 3)
       discount_3 = merch2.discounts.create!(percent: 20, threshold: 3)
     
-      expect(invoice1.invoice_revenue_after_discount).to eq(625)
+      expect(invoice1.invoice_revenue_after_discount).to eq(420)
     end
   end
 end
