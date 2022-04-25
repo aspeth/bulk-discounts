@@ -10,8 +10,8 @@
   <% @invoice.invoice_items.each do |invoice_item| %>
   <h3><%= invoice_item.item.name %></h3>
   <p>     Price: $<%= "%.2f" % invoice_item.price_to_dollars %><br>
-       Quantity sold: <%= invoice_item.quantity %><br>
-       Invoice Item Status: <%= invoice_item.status %>
+      Quantity sold: <%= invoice_item.quantity %><br>
+      Invoice Item Status: <%= invoice_item.status %>
      _______________________</p>
 
     <% end %>
@@ -24,3 +24,14 @@
     <%= f.submit "Submit" %>
     <% end %>
   </section>
+
+
+<h3>Discounted Revenue From This Invoice:</h3>
+<section id="discounted_revenue">
+  Revenue: $<%= (@invoice.discounted_revenue_for_invoice / 100.to_f).round(2) %>
+</section>
+
+<h3>Revenue From This Invoice After Discount:</h3>
+<section id="revenue_after_discount">
+  Revenue: $<%= (@invoice.invoice_revenue_after_discount / 100.to_f).round(2) %>
+</section>

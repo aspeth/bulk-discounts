@@ -66,5 +66,41 @@ RSpec.describe 'the admin invoice show page' do
           expect(page).to have_content("Invoice Status: completed")
         end
     end
+
+    it "has a section for discounted revenue" do
+      merch1 = Merchant.create!(name: "Carl's Castles", created_at: Time.now, updated_at: Time.now)
+      merch2 = Merchant.create!(name: "Soren's Shoes", created_at: Time.now, updated_at: Time.now)
+
+      cust1 = Customer.create!(first_name: "Carl", last_name: "the Cat", created_at: Time.now, updated_at: Time.now)
+      item1 = merch1.items.create!(name: "Big Castle", description: "Our biggest castle", unit_price: 100, created_at: Time.now, updated_at: Time.now)
+      item2 = merch1.items.create!(name: "Medium Castle", description: "Our most medium castle", unit_price: 50, created_at: Time.now, updated_at: Time.now)
+      item3 = merch1.items.create!(name: "Small Castle", description: "Our smallest castle", unit_price: 25, created_at: Time.now, updated_at: Time.now)
+      item4 = merch2.items.create!(name: "Big Castle", description: "Our biggest castle", unit_price: 100, created_at: Time.now, updated_at: Time.now)
+      item5 = merch2.items.create!(name: "Medium Castle", description: "Our most medium castle", unit_price: 50, created_at: Time.now, updated_at: Time.now)
+      item6 = merch2.items.create!(name: "Small Castle", description: "Our smallest castle", unit_price: 25, created_at: Time.now, updated_at: Time.now)
+
+      invoice1 = Invoice.create!(customer_id: cust1.id, created_at: Time.now, updated_at: Time.now)
+      invoice_item_1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, unit_price: item1.unit_price, quantity: 3, created_at: Time.now, updated_at: Time.now)
+      invoice_item_1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, unit_price: item2.unit_price, quantity: 3, created_at: Time.now, updated_at: Time.now)
+      invoice_item_2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, unit_price: item3.unit_price, quantity: 2, created_at: Time.now, updated_at: Time.now)
+      invoice_item_4 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item4.id, unit_price: item4.unit_price, quantity: 3, created_at: Time.now, updated_at: Time.now)
+      invoice_item_5 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item5.id, unit_price: item5.unit_price, quantity: 2, created_at: Time.now, updated_at: Time.now)
+
+      discount_1 = merch1.discounts.create!(percent: 30, threshold: 5)
+      discount_2 = merch1.discounts.create!(percent: 10, threshold: 3)
+      discount_3 = merch2.discounts.create!(percent: 20, threshold: 3)
+    
+      visit "/admin/invoices/#{invoice1.id}"
+
+      expect(page).to have_content("Revenue From This Invoice After Discount:")
+
+      within "#revenue_after_discount" do
+        expect(page).to have_content("Revenue: $7.95")
+      end
+    end
   end
 end
+# As an admin
+# When I visit an admin invoice show page
+# Then I see the total revenue from this invoice (not including discounts)
+# And I see the total discounted revenue from this invoice which includes bulk discounts in the calculation
