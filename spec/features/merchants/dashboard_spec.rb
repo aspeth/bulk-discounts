@@ -130,7 +130,7 @@ RSpec.describe 'Merchant Dashboard Page' do
       expect(item_3.name).to appear_before(item_2.name)
     end
 
-    it "has a link to view all discounts that goes to discounts#index" do
+    it "has a link to view all discounts that goes to discounts#index", :vcr do
       click_link "My Discounts"
       expect(current_path).to eq("/merchants/#{@merch1.id}/discounts")
     end
