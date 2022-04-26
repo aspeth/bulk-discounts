@@ -82,6 +82,24 @@ RSpec.describe 'Merchant Discount Index' do
 
     expect(page).to have_content("Error: Please enter a whole number between 1 and 100")
   end
+  
+  it "displays error if percent is not an integer", :vcr do
+    merch1 = Merchant.create!(name: 'Jeffs Gold Blooms', created_at: Time.now, updated_at: Time.now)
+    merch2 = Merchant.create!(name: 'Miyazakis Dark Souls', created_at: Time.now, updated_at: Time.now)
+    discount_1 = Discount.create!(percent: 10, threshold: 20, merchant_id: merch1.id)
+    discount_2 = Discount.create!(percent: 20, threshold: 30, merchant_id: merch1.id)
+    discount_3 = Discount.create!(percent: 15, threshold: 25, merchant_id: merch2.id)
+    
+    visit "/merchants/#{merch1.id}/discounts"
+
+    click_link 'New Discount'
+    
+    fill_in 'Percent', with: 'Hello'
+    fill_in 'Threshold', with: 'Hello'
+    click_button 'Submit'
+
+    expect(page).to have_content("Error: Please enter a whole number between 1 and 100")
+  end
 
   it "has a link to delete each discount", :vcr do
     merch1 = Merchant.create!(name: 'Jeffs Gold Blooms', created_at: Time.now, updated_at: Time.now)

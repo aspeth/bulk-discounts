@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 26 Apr 2022 21:09:06 GMT
+      - Tue, 26 Apr 2022 21:09:07 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -31,13 +31,13 @@ http_interactions:
       Cf-Cache-Status:
       - HIT
       Age:
-      - '20868'
+      - '20869'
       Last-Modified:
       - Tue, 26 Apr 2022 15:21:18 GMT
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=oPF04HjqbtXKtV8ugzHClPd0DUP4WMkHyTlvVR5o%2F%2BaGdQhKnmSW7HLTbHBRTATpVt1mQDSdrdkCN63ieKsFC4ut5Gw%2F9IWIX%2BmTG1ORkw2UP2sQNp5VZUlNzfGr2wHI"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=3Bx8D9rCuclFRAlEGfW8ErPSiIRnAqKr78rBeZcC9gCPson1n5X9dy56rIP39wR5Z36OqLVyQVoeL5qGOTxIfkWBlVQiO8oe5KhdXzMVTlvc%2FkAToDO4NSjwy3MuNEVR"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Vary:
@@ -45,7 +45,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 70224c2cc9d4aa69-DFW
+      - 70224c2fb93a9e98-DFW
       Alt-Svc:
       - h3=":443"; ma=86400, h3-29=":443"; ma=86400
     body:
@@ -61,7 +61,7 @@ http_interactions:
         Luther King, Jr. Day","name":"Martin Luther King, Jr. Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"types":["Public"]},{"date":"2023-02-20","localName":"Presidents
         Day","name":"Washington''s Birthday","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"types":["Public"]},{"date":"2023-04-07","localName":"Good
         Friday","name":"Good Friday","countryCode":"US","fixed":false,"global":false,"counties":["US-CT","US-DE","US-HI","US-IN","US-KY","US-LA","US-NC","US-ND","US-NJ","US-TN"],"launchYear":null,"types":["Public"]}]'
-  recorded_at: Tue, 26 Apr 2022 21:09:06 GMT
+  recorded_at: Tue, 26 Apr 2022 21:09:07 GMT
 - request:
     method: get
     uri: https://date.nager.at/api/v2/NextPublicHolidays/US
@@ -81,7 +81,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 26 Apr 2022 21:09:06 GMT
+      - Tue, 26 Apr 2022 21:09:07 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -93,13 +93,13 @@ http_interactions:
       Cf-Cache-Status:
       - HIT
       Age:
-      - '20868'
+      - '20869'
       Last-Modified:
       - Tue, 26 Apr 2022 15:21:18 GMT
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=WMydhRgtre7vu5HPC%2FsZDrVz0h9CpEZ%2Bhah11ta3IasDB%2Bqerz6rugWK90LzksSYRvhbk%2FX6B0i%2BdJ%2BFIxQb0yxOcWlG5LPhMnyeN89ipkB9Bgt6vxMVvXkM%2BBDEUcJL"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=ElNdym3ulJbDc%2B5swKsFA48D3ldVb7l003OiH8OlsLz66siOMcTLyQIJnvvl7W09d%2F%2BQjv4ZXFw56oUacZqtv1Y91CHZKHDer6bXSKWzAC79KAFl0DVExuJRWky2Z609"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Vary:
@@ -107,7 +107,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 70224c2d8fd09e9b-DFW
+      - 70224c30789f9f1c-DFW
       Alt-Svc:
       - h3=":443"; ma=86400, h3-29=":443"; ma=86400
     body:
@@ -123,5 +123,5 @@ http_interactions:
         Luther King, Jr. Day","name":"Martin Luther King, Jr. Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"types":["Public"]},{"date":"2023-02-20","localName":"Presidents
         Day","name":"Washington''s Birthday","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"types":["Public"]},{"date":"2023-04-07","localName":"Good
         Friday","name":"Good Friday","countryCode":"US","fixed":false,"global":false,"counties":["US-CT","US-DE","US-HI","US-IN","US-KY","US-LA","US-NC","US-ND","US-NJ","US-TN"],"launchYear":null,"types":["Public"]}]'
-  recorded_at: Tue, 26 Apr 2022 21:09:06 GMT
+  recorded_at: Tue, 26 Apr 2022 21:09:07 GMT
 recorded_with: VCR 6.1.0
