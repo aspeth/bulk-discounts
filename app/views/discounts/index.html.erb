@@ -8,3 +8,8 @@
 <% end %>
 
   <p> <%= link_to "New Discount", "/merchants/#{@merchant.id}/discounts/new" %> </p>
+
+<h3> Upcoming Holidays </h3>
+  <% @facade.holiday.holidays.each do |h| %>
+    <p> <%= h %> </p>
+  <% end %>
