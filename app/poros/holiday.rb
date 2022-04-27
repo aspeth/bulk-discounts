@@ -1,9 +1,8 @@
 class Holiday
-  attr_reader :holidays
+  attr_reader :name, :date
 
   def initialize(data)
-    @holidays = data[0..2].map do |holiday|
-                  holiday[:name]
-                end
+    @name = data[:name]
+    @date = data[:date]
   end
 end

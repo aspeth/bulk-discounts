@@ -135,6 +135,9 @@ RSpec.describe 'Merchant Discount Index' do
     expect(page).to have_content("Memorial Day")
     expect(page).to have_content("Juneteenth")
     expect(page).to have_content("Independence Day")
+    expect(page).to have_content("2022-05-30")
+    expect(page).to have_content("2022-06-20")
+    expect(page).to have_content("2022-07-04")
   end
 end
 # As a merchant
