@@ -16,13 +16,16 @@ class Item < ApplicationRecord
 
   end
 
-  def best_sales_day
-    invoices.joins(:invoice_items).where('invoices.status = 2')
-    .select('invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
-    .group('invoices.id')
-    .order(total_revenue: :desc)
-    .first
-  end
+  # def best_day
+  #   require 'pry'; binding.pry
+  #   invoice_items.joins(:invoices)
+  #   .where('invoices.status = 2')
+  #   # invoices.joins(:invoice_items).where('invoices.status = 2')
+  #   # .select('invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
+  #   # .group('invoices.id')
+  #   # .order(total_revenue: :desc)
+  #   # .first
+  # end
 
   # def total_sales(item_id)
   #   item = Item.find(item_id)
