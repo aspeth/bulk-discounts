@@ -83,7 +83,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
       expect(page).to have_content("Total Revenue From This Invoice:")
       within "#total_revenue" do
-        expect(page).to have_content("Revenue: $4167.88")
+        expect(page).to have_content("$4167.88")
       end
     end
 
@@ -131,12 +131,12 @@ RSpec.describe 'Merchant Invoice Show Page' do
     visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
     expect(page).to have_content("Total Revenue From This Invoice:")
     within "#total_revenue" do
-      expect(page).to have_content("Revenue: $5.25")
+      expect(page).to have_content("$5.25")
     end
     
     expect(page).to have_content("Discounted Revenue From This Invoice:")
     within "#discounted_revenue" do
-      expect(page).to have_content("Revenue: $0.53")
+      expect(page).to have_content("$0.53")
     end
   end
 
@@ -158,7 +158,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
     visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
     expect(page).to have_content("Revenue From This Invoice After Discount:")
     within "#revenue_after_discount" do
-      expect(page).to have_content("Revenue: $4.73")
+      expect(page).to have_content("$4.73")
     end
   end
 
