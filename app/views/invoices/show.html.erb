@@ -16,7 +16,7 @@
   Quantity Ordered: <%= invoice_item.quantity %><br>
   Item Price: <%= invoice_item.price_to_dollars %><br>
   Invoice Item Status: <%= invoice_item.status %><br>
-  Update This Items Status: <%= form_with url: "/merchants/#{@merchant.id}/invoice_items", method: :patch, local: true do |f|%>
+  Update This Item's Status: <%= form_with url: "/merchants/#{@merchant.id}/invoice_items", method: :patch, local: true do |f|%>
     <%= f.select :status, InvoiceItem.statuses.keys, value: "#{invoice_item.status}" %>
     <%= f.hidden_field :invoice_item_id, value: "#{invoice_item.id}"  %>
     <%= f.hidden_field :invoice_id, value: "#{@invoice.id}"  %>
@@ -31,15 +31,15 @@
 <% end %>
 <h3>Total Revenue From This Invoice:</h3>
 <section id="total_revenue">
-  Revenue: $<%= (@invoice.revenue_for_merchant(@merchant) / 100.to_f).round(2) %>
+  $<%= (@invoice.revenue_for_merchant(@merchant) / 100.to_f).round(2) %>
 </section>
 
 <h3>Discounted Revenue From This Invoice:</h3>
 <section id="discounted_revenue">
-  Revenue: $<%= (@invoice.discounted_revenue_for_merchant(@merchant) / 100.to_f).round(2) %>
+  $<%= (@invoice.discounted_revenue_for_merchant(@merchant) / 100.to_f).round(2) %>
 </section>
 
 <h3>Revenue From This Invoice After Discount:</h3>
 <section id="revenue_after_discount">
-  Revenue: $<%= (@invoice.revenue_after_discount(@merchant) / 100.to_f).round(2) %>
+  $<%= (@invoice.revenue_after_discount(@merchant) / 100.to_f).round(2) %>
 </section>
