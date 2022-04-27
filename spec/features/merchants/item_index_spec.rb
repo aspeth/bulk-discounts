@@ -125,7 +125,7 @@ RSpec.describe 'Merchant Item Index Page' do
     end
   end
 
-  it 'next to the top five items I see the date with the most sales for each item', :vcr  do
+  xit 'next to the top five items I see the date with the most sales for each item', :vcr  do
     merchant_1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now)
     customer_1 = create(:customer)
     item_9 = create(:item, name: 'Elden Ring', unit_price: 999, merchant_id: merchant_1.id)
